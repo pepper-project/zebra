@@ -1,0 +1,21 @@
+P V0 = I0 E
+P V1 = I1 E
+P V2 = I2 E
+P V3 = I3 E
+P V4 = I4 E
+P V5 = I5 E
+P V6 = I6 E
+P V7 = I7 E
+
+MUX O8 = V0 mux V1 bit 0
+MUX O9 = V1 mux V0 bit 0
+MUX O10 = V2 mux V3 bit 1
+
+
+MUX O11 = V1 mux V2 bit 0
+MUX O12 = V4 mux V5 bit 2
+
+
+MUX O13 = V5 mux V6 bit 2
+MUX O14 = V6 mux V7 bit 3
+MUX O15 = V0 mux V7 bit 3

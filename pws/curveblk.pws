@@ -1,0 +1,47 @@
+
+P V0 = I0 E //x-coord of Q, the actual input
+P V1 = 1 E //z = 1
+P V2 = 1 E //x' = 1
+P V3 = 0 E //z' = 0
+
+MUX V4 = V0 mux V2 bit 0  //x
+MUX V5 = V1 mux V3 bit 0  //z
+MUX V6 = V2 mux V0 bit 0  //x'
+MUX V7 = V3 mux V1 bit 0  //z'
+
+P V8 = V4 + V5 E          //x+z
+P V9 = V4 minus V5 E      //x-z
+P V10 = V6 + V7 E         //x'+z'
+P V11 = V6 minus V7 E     //x'-z'
+
+P V12 = V8 * V8 E         //(x+z)^2
+P V13 = V9 * V9 E         //(x-z)^2
+P V14 = V9 * V10 E        //(x-z) * (x'+z')
+P V15 = V8 * V11 E        //(x+z) * (x'-z')
+
+P V16 = V12 * V13 E       //(x+z)^2 * (x-z)^2
+P V17 = V12 minus V13 E   //(x+z)^2 - (x-z)^2
+P V18 = V14 + V15 E       //(x-z) * (x'+z') +  (x+z) * (x'-z')
+P V19 = V14 minus V15 E   //(x-z) * (x'+z') -  (x+z) * (x'-z')
+
+P V20 = V17 * 121665 E    //(A-2)/4 * ((x+z)^2 - (x-z)^2)
+P V21 = V18 * V18 E       //((x-z) * (x'+z') +  (x+z) * (x'-z'))^2
+P V22 = V19 * V19 E       //((x-z) * (x'+z') -  (x+z) * (x'-z'))^2
+
+P V23 = V12 + V20 E       //(x+z)^2 + ((A-2)/4 * ...)
+P V24 = V22 * V0 E        // (...)^2 * (x-coord of input (Q))
+
+P V25 = V17 * V23 E      //(x+z)^2 - (x-z)^2 * ((A-2)/4 * ...)
+
+MUX V26 = V16 mux V21 bit 0 //x2 mux x3
+MUX V27 = V25 mux V24 bit 0 //z2 mux z3
+MUX V28 = V21 mux V16 bit 0 //x3 mux x2
+MUX V29 = V24 mux V25 bit 0 //z3 mux z2
+
+P O34 = V26 E
+P O35 = V27 E
+P O36 = V28 E
+P O37 = V29 E
+
+
+

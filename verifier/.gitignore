@@ -1,0 +1,6 @@
+sendrcv_test
+verifier
+precompute
+libcmtprecomp.so
+*.pws
+*.o

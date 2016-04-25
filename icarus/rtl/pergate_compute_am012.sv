@@ -1,0 +1,1 @@
+../../common/rtl/pergate_compute_am012.sv

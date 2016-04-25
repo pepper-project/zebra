@@ -1,0 +1,1 @@
+../../common/tb/prover_synth_test_tb.sv

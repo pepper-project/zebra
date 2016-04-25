@@ -1,0 +1,1 @@
+../../common/tb/cmt_top_test.sv

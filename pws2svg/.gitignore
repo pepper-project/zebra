@@ -1,0 +1,4 @@
+pws2svg
+*.pws
+*.svg
+*.o

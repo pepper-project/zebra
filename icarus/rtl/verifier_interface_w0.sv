@@ -1,0 +1,1 @@
+../../common/rtl/verifier_interface_w0.sv

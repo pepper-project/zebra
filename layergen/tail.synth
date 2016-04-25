@@ -1,0 +1,50 @@
+localparam shuf_plstages = 2;
+localparam nhpoints = $clog2(ninputs) + 1;
+
+// ringbuf to hold output from each round of sumcheck
+wire f_wren, p_wren;
+wire [`F_NBITS-1:0] fp_data;
+wire buf_en = f_wren | p_wren;
+ringbuf_simple
+   #( .nbits        (`F_NBITS)
+    , .nwords       (nhpoints)
+    ) ibuf
+    ( .clk          (clk)
+    , .rstb         (rstb)
+    , .en           (buf_en)
+    , .wren         (buf_en)
+    , .d            (fp_data)
+    , .q            ()
+    , .q_all        (buf_data)
+    );
+
+// one layer of the prover
+prover_layer
+   #( .ngates           (ngates)
+    , .ninputs          (ninputs)
+    , .gates_fn         (gates_fn)
+    , .gates_in0        (gates_in0)
+    , .gates_in1        (gates_in1)
+    , .shuf_plstages    (shuf_plstages)
+    ) iprv
+    ( .clk              (clk)
+    , .rstb             (rstb)
+    , .en               (en)
+    , .restart          (restart)
+    , .v_in             (v_in)
+    , .tau              (tau)
+    , .mux_sel          (0)
+    , .f_wren           (f_wren)
+    , .p_wren           (p_wren)
+    , .fp_data          (fp_data)
+    , .comp_w0          (comp_w0)
+    , .tau_w0           (tau_w0)
+    , .w0               (w0)
+    , .w0_ready_pulse   (w0_ready_pulse)
+    , .w0_ready         (w0_ready)
+    , .ready_pulse      (ready_pulse)
+    , .ready_code       (ready_code)
+    );
+
+endmodule
+// vim: syntax=verilog_systemverilog

@@ -1,0 +1,19 @@
+# makefile fragment for invoking pws2sv
+# (C) 2015 Riad S. Wahby <rsw@cs.nyu.edu>
+
+MUXRENUM ?= 0
+PIPELINE ?= 1
+NREPS ?= 1
+PLFLAG := -p
+CMTFILE := rtl/cmt_top_pl.sv
+ifneq ($(PIPELINE),1)
+    PLFLAG :=
+    CMTFILE := rtl/cmt_top.sv
+endif
+ifeq ($(MUXRENUM),1)
+    PLFLAG += -m
+endif
+pws_%: ../pws/%.pws
+	make -C ../pws2sv
+	../pws2sv/pws2sv.pl $< $(NREPS) $(PLFLAG) > $(CMTFILE)
+# vim: syntax=make

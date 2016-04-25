@@ -1,0 +1,1 @@
+../../common/tb/prover_compute_c012_fm1_test.sv

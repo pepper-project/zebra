@@ -1,0 +1,1 @@
+../../common/rtl/sram_generic.sv

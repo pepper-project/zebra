@@ -1,0 +1,4 @@
+*.vcd
+*.fst
+*.fst.hier
+arith_log.txt
